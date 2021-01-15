@@ -10,9 +10,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour 
 {
     public PlayerManager playerManager;
-    public FatoryManager fatoryManager;
+    public FactoryManager factoryManager;
     public AudioSourceManager audioSourceManager;
-    public UIManager uIManager;
+    public UIManager uiManager;
 
 
     private static GameManager _instance;
@@ -32,14 +32,46 @@ public class GameManager : MonoBehaviour
         _instance = this;
         //实例化各种管理者 顺序实例化
         playerManager = new PlayerManager();
-        fatoryManager = new FatoryManager();
+        factoryManager = new FactoryManager();
         audioSourceManager = new AudioSourceManager();
-        uIManager = new UIManager();
+        uiManager = new UIManager();
+        //进入第一个场景
+        uiManager.mUIFacade.currentSceneState.EnterScene();
     }
 
     public GameObject CreatItem(GameObject itemGO)
     {
         GameObject go = Instantiate(itemGO);
         return go;
+    }
+
+    //获取Sprite资源
+    public Sprite GetSprite(string path)
+    {
+        return factoryManager.spriteFactory.GetSingleResources(path);
+    }
+
+    //获取AudioCLip资源
+    public AudioClip GetAudioClip(string path)
+    {
+        return factoryManager.audioClipFactory.GetSingleResources(path);
+    }
+
+    //获取动画控制器
+    public RuntimeAnimatorController GetRuntimeAnimatorController(string path)
+    {
+        return factoryManager.runTimeAnimatorControllerFactory.GetSingleResources(path);
+    }
+
+    //获取游戏物体
+    public GameObject GetGameObjectResource(FactoryType factoryType,string itemName)
+    {
+        return factoryManager.factoryDict[factoryType].GetItem(itemName); 
+    }
+
+    //将游戏物体放入对象池
+    public void PushGameObjectResourceToFactory(FactoryType factoryType, string itemName,GameObject itemGO)
+    {
+         factoryManager.factoryDict[factoryType].PushItem(itemName,itemGO);
     }
 }

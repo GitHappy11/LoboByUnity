@@ -7,7 +7,10 @@
 
 using UnityEngine;
 
-public class BossGameOptionSceneStateL:BaseSceneState
+public class BossGameOptionSceneState:BaseSceneState
 {
+    public BossGameOptionSceneState(UIFacade uiFacade) : base(uiFacade)
+    {
 
+    }
 }

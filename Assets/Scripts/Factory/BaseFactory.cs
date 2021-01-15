@@ -28,7 +28,7 @@ public class BaseFactory : IBaseFacoty
     
 
     
-    public GameObject GetItem(string itemName,GameObject item)
+    public GameObject GetItem(string itemName)
     {
         GameObject itemGO = null;
         //查找是否有这个对象池

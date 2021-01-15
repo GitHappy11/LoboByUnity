@@ -9,5 +9,8 @@ using UnityEngine;
 
 public class MonstarNastSceneState : BaseSceneState 
 {
-    
+    public MonstarNastSceneState(UIFacade uiFacade) : base(uiFacade)
+    {
+
+    }
 }

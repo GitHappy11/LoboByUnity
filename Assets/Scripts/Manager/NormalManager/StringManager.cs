@@ -9,5 +9,18 @@ using UnityEngine;
 
 public class StringManager 
 {
+    public const string StartLoadPanel = "PanelStartLoad";
+    public const string MainPanel = "PanelMain";
+    public const string SetPanel = "PanelSet";
+    public const string GameLoadPanel = "PanelGameLoad";
+    public const string HelpPanel = "PanelHelp";
+    public const string GameNormalOptionPanel = "PanelGameNormalOption";
+    public const string GameNormalBigLevelPanel = "PanelGameNormalBigLevel";
+    public const string GameNormalLevelPanel = "PanelGameNoramlLevel";
+    public const string GameBossOptionPanel = "PanelGameBossOption";
+    public const string BossModePanel = "PanelBossModel";
+    public const string MonsterNestPanel = "PanelMonsterNest";
+
+
 
 }

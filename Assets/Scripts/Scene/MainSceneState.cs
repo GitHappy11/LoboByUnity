@@ -9,5 +9,8 @@ using UnityEngine;
 
 public class MainSceneState : BaseSceneState 
 {
+    public MainSceneState(UIFacade uiFacade) : base(uiFacade)
+    {
 
+    }
 }

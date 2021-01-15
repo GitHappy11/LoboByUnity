@@ -9,5 +9,8 @@ using UnityEngine;
 
 public class NormalGameOptionState : BaseSceneState 
 {
+    public NormalGameOptionState(UIFacade uiFacade) : base(uiFacade)
+    {
 
+    }
 }

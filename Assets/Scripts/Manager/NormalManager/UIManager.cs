@@ -18,8 +18,24 @@ public class UIManager
     {
         mGameManager = GameManager.Instance;
         currentScenePanelDict = new Dictionary<string, GameObject>();
-        mUIFacade = new UIFacade();
+        mUIFacade = new UIFacade(this);
+        mUIFacade.currentSceneState = new StartLoadSceneState(mUIFacade);
+    }
+    //将UIPanel放回工厂
+    private void PushUIPanel(string uiPanelName,GameObject uiPanelGO)
+    {
+        mGameManager.PushGameObjectResourceToFactory(FactoryType.UIPanelFactory, uiPanelName, uiPanelGO);
     }
 
+    //清空字典
+    public void ClearDict()
+    {
+        foreach (var item in currentScenePanelDict)
+        {
+            PushUIPanel(item.Value.name, item.Value);
+        }
+        //将字典内的游戏对象回收完后清空字典
+        currentScenePanelDict.Clear();
+    }
 
 }
