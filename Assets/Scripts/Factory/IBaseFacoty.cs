@@ -9,7 +9,7 @@ using UnityEngine;
 
 public interface IBaseFacoty  
 {
-    GameObject GetItem(string itemName);
+    GameObject GetItem(string itemName,GameObject item);
 
     void PushItem(string itemName, GameObject item);
 

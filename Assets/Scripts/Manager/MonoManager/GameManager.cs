@@ -36,4 +36,10 @@ public class GameManager : MonoBehaviour
         audioSourceManager = new AudioSourceManager();
         uIManager = new UIManager();
     }
+
+    public GameObject CreatItem(GameObject itemGO)
+    {
+        GameObject go = Instantiate(itemGO);
+        return go;
+    }
 }
