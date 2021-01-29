@@ -32,7 +32,8 @@ public class UIManager
     {
         foreach (var item in currentScenePanelDict)
         {
-            PushUIPanel(item.Value.name, item.Value);
+            //将后面的（clone）去掉，防止无法清除原名（无clone后缀）创建的栈 截取
+            PushUIPanel(item.Value.name.Substring(0,item.Value.name.Length-7), item.Value);
         }
         //将字典内的游戏对象回收完后清空字典
         currentScenePanelDict.Clear();

@@ -9,13 +9,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour 
 {
+    [HideInInspector]
     public PlayerManager playerManager;
     public FactoryManager factoryManager;
     public AudioSourceManager audioSourceManager;
     public UIManager uiManager;
 
 
+    
     private static GameManager _instance;
+    
     public static GameManager Instance
     {
         get

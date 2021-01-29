@@ -36,6 +36,7 @@ public class UIFacade
         mplayerManager = mGameManager.playerManager;
         mUIManager = uIManager;
         mAudioSourceManager = mGameManager.audioSourceManager;
+        InitMask();
     }
 
     //初始化遮罩（加载界面）
@@ -44,11 +45,18 @@ public class UIFacade
         canvasTransform = GameObject.Find("Canvas").transform;
         //mask = mGameManager.factoryManager.factoryDict[FactoryType.UIFactory].GetItem("imgMask");
         mask = GetGameObjectResource(FactoryType.UIFactory, "imgMask");
+        mask.transform.SetParent(canvasTransform);
+        mask.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+        mask.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+        mask.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
         maskImage = mask.GetComponent<Image>();
     }
     //显示遮罩
     public void ShowMask()
     {
+        //更改渲染层级(数字越大越后渲染【越优先显示】) 只是以当前状态的层级设置，无法阻止后面生成的UI覆盖，后面有UI生成的话需要再次设置
+        mask.transform.SetSiblingIndex(10);
+
         Tween t = DOTween.To(() => maskImage.color, toColor => maskImage.color = toColor, new Color(0, 0, 0, 1),2f);
         //动画结束后回调函数
         t.OnComplete(ExitSceneComplete);
@@ -56,19 +64,22 @@ public class UIFacade
     //离开当前场景
     private void ExitSceneComplete()
     {
+        HideMask();
         lastSceneState.ExitScene();
         currentSceneState.EnterScene();      
     }
     //隐藏遮罩
     public  void HideMask()
     {
+        //更改渲染层级(数字越大越后渲染【越优先显示】)
+        mask.transform.SetSiblingIndex(10);
         //不需要回调事件 动画完毕即销毁
         DOTween.To(() => maskImage.color, toColor => maskImage.color = toColor, new Color(0, 0, 0, 0), 2f);
     }
     //更改当前场景的状态
     public void ChangeSceneState(IBaseSceneState baseSceneState)
     {
-        //切换场景  现在变成上一个
+        //切换场景  现在变成上一个  场景还没更改，状态先更改好，以便后面对比跳转
         lastSceneState = currentSceneState;
         ShowMask();
         currentSceneState = baseSceneState;
@@ -114,6 +125,10 @@ public class UIFacade
         {
             //遍历的是键值对，要的是值
             item.Value.transform.SetParent(canvasTransform);
+            item.Value.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            item.Value.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            item.Value.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 0);
+
             item.Value.transform.localPosition = Vector3.zero;
             item.Value.transform.localScale = Vector3.one;
             IBasePanel basePanel = item.Value.GetComponent<IBasePanel>();

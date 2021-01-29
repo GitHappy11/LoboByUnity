@@ -6,8 +6,9 @@
 *****************************************************/
 
 
+using UnityEngine;
 
-public class BasePanel : IBasePanel
+public class BasePanel : MonoBehaviour, IBasePanel
 {
     protected UIFacade mUIFacade;
 

@@ -23,7 +23,7 @@ public class BaseFactory : IBaseFacoty
     protected string loadPath;
     public BaseFactory()
     {
-        loadPath = "Study/Prefabs";
+        loadPath = "Study/Prefabs/";
     }
     
 
@@ -81,7 +81,7 @@ public class BaseFactory : IBaseFacoty
         //没有
         else
         {
-            Debug.Log("当期物体没有" + itemName + "的栈");
+            Debug.LogWarning("当期物体没有" + itemName + "的栈");
         }
     }
 
